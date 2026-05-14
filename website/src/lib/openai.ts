@@ -4,7 +4,13 @@ let _openai: OpenAI | null = null;
 
 function getOpenAIClient(): OpenAI {
   if (!_openai) {
-    _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    const gatewayKey = process.env.VERCEL_AI_GATEWAY_KEY;
+    _openai = gatewayKey
+      ? new OpenAI({
+          apiKey: gatewayKey,
+          baseURL: "https://ai.vercel.is/v1/openai",
+        })
+      : new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   }
   return _openai;
 }

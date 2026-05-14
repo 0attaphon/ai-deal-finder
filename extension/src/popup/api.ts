@@ -1,6 +1,5 @@
 import type { PriceEntry, ReviewSummary } from "../content/types";
-
-const SITE_URL = import.meta.env.VITE_SITE_URL ?? "http://localhost:3000";
+import { SITE_URL } from "./config";
 
 export async function fetchReviewSummary(
   productId: string,

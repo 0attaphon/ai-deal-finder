@@ -1,8 +1,11 @@
 import type { ProductData } from "../types";
 
 function extractShopeeItemId(): string | null {
-  // Shopee URL: /product-name-i.shopId.itemId
-  const match = window.location.pathname.match(/\.(\d+)\.(\d+)$/);
+  // Shopee URL patterns:
+  // /product-name-i.shopId.itemId
+  // /product-name-i.shopId.itemId (with query string handled by pathname)
+  const path = window.location.pathname;
+  const match = path.match(/[.-]i\.(\d+)\.(\d+)/) ?? path.match(/\.(\d+)\.(\d+)$/);
   return match ? `${match[1]}-${match[2]}` : null;
 }
 
