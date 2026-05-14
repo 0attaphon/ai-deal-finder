@@ -57,30 +57,37 @@ export async function fetchPricesFromAPI(
   }
 }
 
-// Development fallback — remove before production
+// Development fallback — used when PRICE_API_KEY is not set
 function getMockPrices(productId: string, store: SupportedStore): PriceEntry[] {
   const basePrice = (productId.charCodeAt(0) % 50 + 10) * 100;
+
+  // productId format: shopId-itemId (e.g. "797730103-29736997537")
+  const [shopId, itemId] = productId.split("-");
+  const shopeeUrl = shopId && itemId
+    ? `https://shopee.co.th/i.${shopId}.${itemId}`
+    : `https://shopee.co.th/search?keyword=${encodeURIComponent(productId)}`;
+
   return [
-    {
-      store: "amazon",
-      price: basePrice,
-      currency: "THB",
-      affiliateUrl: `https://amazon.com/dp/${productId}`,
-      available: true,
-    },
     {
       store: "shopee",
       price: Math.round(basePrice * 0.92),
       currency: "THB",
-      affiliateUrl: `https://shopee.th/product/${productId}`,
+      affiliateUrl: shopeeUrl,
       available: true,
     },
     {
       store: "lazada",
       price: Math.round(basePrice * 0.97),
       currency: "THB",
-      affiliateUrl: `https://lazada.co.th/products/${productId}`,
+      affiliateUrl: `https://www.lazada.co.th/catalog/?q=${encodeURIComponent(productId)}`,
       available: store !== "lazada",
+    },
+    {
+      store: "amazon",
+      price: basePrice,
+      currency: "THB",
+      affiliateUrl: `https://www.amazon.com/s?k=${encodeURIComponent(productId)}`,
+      available: true,
     },
   ];
 }
