@@ -5,7 +5,7 @@ import { ReviewSummaryCard } from "./components/ReviewSummaryCard";
 import { PriceComparisonRow } from "./components/PriceComparisonRow";
 import { fetchReviewSummary, fetchPrices } from "./api";
 
-const SITE_URL = import.meta.env.VITE_SITE_URL ?? "http://localhost:3000";
+import { SITE_URL } from "./config";
 
 type AppState =
   | { status: "idle" }

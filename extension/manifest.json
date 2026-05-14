@@ -23,17 +23,24 @@
         "*://*.amazon.com/gp/product/*",
         "*://www.amazon.co.uk/dp/*",
         "*://shopee.th/*",
-        "*://www.lazada.co.th/*"
+        "*://*.shopee.co.th/*",
+        "*://shopee.co.th/*",
+        "*://*.shopee.com/*",
+        "*://www.lazada.co.th/*",
+        "*://*.lazada.co.th/*"
       ],
       "js": ["src/content/index.ts"],
       "run_at": "document_idle"
     }
   ],
-  "permissions": ["activeTab", "storage"],
+  "permissions": ["activeTab", "storage", "tabs"],
   "host_permissions": [
     "*://*.amazon.com/*",
     "*://shopee.th/*",
-    "*://www.lazada.co.th/*"
+    "*://*.shopee.co.th/*",
+    "*://*.shopee.com/*",
+    "*://www.lazada.co.th/*",
+    "*://*.lazada.co.th/*"
   ],
   "icons": {
     "16": "icons/icon16.png",
